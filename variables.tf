@@ -1,4 +1,7 @@
-variable "region" {
-  description = "region"
-  default     = "us-west-1"
+variable "sa" {
+  description = "service account"
+}
+
+variable "project_id" {
+  description = "gcp project id"
 }
