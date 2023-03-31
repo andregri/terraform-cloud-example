@@ -1,7 +1,7 @@
 terraform {
 
   cloud {
-    organization = "krateoplatformops"
+    organization = "andregri"
 
     workspaces {
       name = "learn-terraform-cloud"
