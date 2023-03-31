@@ -1,28 +1,20 @@
-provider "aws" {
-  region = var.region
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "4.51.0"
+    }
+  }
 }
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
+provider "google" {
+  credentials = var.sa
 
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
+  project = var.project_id
+  region  = "us-central1"
+  zone    = "us-central1-c"
 }
 
-resource "aws_instance" "ubuntu" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
-
-  tags = {
-    Name = var.instance_name
-  }
+resource "google_compute_network" "vpc_network" {
+  name = "terraform-network"
 }
